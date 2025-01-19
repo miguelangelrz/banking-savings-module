@@ -5,8 +5,11 @@ export default function Login() {
   return (
     <div className="p-3">
       <h1>Login</h1>
-      <BaseInput label="email" />
-      <BaseInput label="password" />
+      <form>
+        <BaseInput label="Correo" />
+        <BaseInput label="Contraseña" />
+        <button type="submit">Ingresar</button>
+      </form>
       <div>
         ¿No tienes cuenta?{' '}
         <Link href="/register" className="link">
