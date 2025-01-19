@@ -1,0 +1,46 @@
+services:
+  mongo:
+    container_name: mongodb
+    image: mongo
+    restart: always
+    ports:
+      - '${MONGO_PORT}:${MONGO_PORT}'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    container_name: back
+    build:
+      context: ./back
+    ports:
+      - '${BACKEND_PORT}:3000'
+    environment:
+      - MONGO_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}?authSource=admin
+      - ALLOWED_ORIGINS=${BACKEND_ALLOWED_ORIGINS}
+    volumes:
+      - ./back:/app
+      - /app/node_modules
+    command: npm run start:dev
+    depends_on:
+      - mongo
+
+  frontend:
+    container_name: front
+    build:
+      context: ./front
+    ports:
+      - '${FRONTEND_PORT}:3000'
+    environment:
+      - NEXT_PUBLIC_API_URL=${API_URL}
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+    command: npm run dev
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
