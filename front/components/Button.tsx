@@ -1,5 +1,4 @@
 import { assert } from 'console';
-import { link } from 'fs';
 import Link from 'next/link';
 import React from 'react';
 
@@ -12,14 +11,18 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export default function Button(props: ButtonProps) {
   const { variant, children, href, fullWidth, isLink, className, ...buttonProps } = props;
-  assert((isLink && Boolean(href)) || !isLink, variant, href);
+
+  if (isLink && !Boolean(href)) {
+    throw new Error("Invalid Button type");
+    
+  }
 
   const baseClases = 'rounded cursor-pointer font-semibold py-2 px-3';
   const fullWidthClasses = 'w-full';
   const primaryClasses = 'bg-slate-800 text-slate-100';
   const secondaryClasses = 'bg-slate-200 text-slate-800';
   const dangerClasses = 'bg-red-700 text-red-100';
-  const linkClasses = 'text-center';
+  const linkClasses = 'text-center no-underline';
   const disabledClasses = 'bg-gray-300 text-gray-800';
 
   const appliedClasses = [baseClases];

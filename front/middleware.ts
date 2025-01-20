@@ -5,7 +5,7 @@ const NO_AUTH_PAGES = ['/login', '/register']
 const PROTECTED_BASE_ROUTE = '/dashboard'
 
 export function middleware(req: NextRequest) {
-    const token = "okokok";
+    const token = null;
 
     if (NO_AUTH_PAGES.includes(req.nextUrl.pathname)) {
         if (token) {

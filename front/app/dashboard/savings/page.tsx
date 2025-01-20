@@ -1,7 +1,9 @@
 'use client';
 
+import Button from '@/components/Button';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { ReactElement } from 'react';
 
 export default function Savings() {
   const savingsAccounts: Array<SavingsAccountPreview> = [
@@ -18,19 +20,16 @@ export default function Savings() {
 
   return (
     <>
-      <div className="flex justify-between">
-        <h1>Mis productos financieros</h1>
-        <Link href="/dashboard/savings/request">Solicitar nueva cuenta</Link>
-      </div>
-      <div className="grid grid-cols-4 gap-2">
+      <h2>Mis productos financieros</h2>
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-2">
         {savingsAccounts.map((p) => (
           <div
             key={p.id}
-            className="bg-red-400 p-3 rounded cursor-pointer"
+            className="bg-slate-600 text-slate-100 p-3 rounded cursor-pointer"
             onClick={() => goToSavingsAccount(p.id)}
           >
             <div>**** **** **** {p.lastFour} </div>
-            <div className="flex justify-end">
+            <div className="flex justify-end font-bold mt-2 text-sm">
               {p.currency} {p.currency === 'EUR' && '€'}
               {p.currency !== 'EUR' && '$'}
               {p.balance}
@@ -38,6 +37,9 @@ export default function Savings() {
           </div>
         ))}
       </div>
+      <Button variant="secondary" className="mt-5" isLink href="/dashboard/savings/request">
+        Solicitar nueva cuenta
+      </Button>
     </>
   );
 }
