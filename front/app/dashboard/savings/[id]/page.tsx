@@ -8,6 +8,7 @@ type SavingsAccountDetailParams = {
 
 export default async function SavingsAccountDetail({ params }: SavingsAccountDetailParams) {
   const id = (await params).id;
+  console.log("#id", id)
   const data: SavingsAccount = {
     id: '123e4567-e89b-12d3-a456-426614174000',
     accountNumber: '0123456789012345',

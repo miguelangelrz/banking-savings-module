@@ -1,9 +1,7 @@
 'use client';
 
 import Button from '@/components/Button';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { ReactElement } from 'react';
 
 export default function Savings() {
   const savingsAccounts: Array<SavingsAccountPreview> = [
