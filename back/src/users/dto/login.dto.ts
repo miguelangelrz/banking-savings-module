@@ -1,10 +1,10 @@
-import { IsEnum, IsNumber, IsString } from 'class-validator';
+import {  IsString } from 'class-validator';
 
 export class LoginDto {
   @IsString()
   documentType: 'CC';
 
-  @IsNumber()
+  @IsString()
   documentNumber: string;
   
   @IsString()
