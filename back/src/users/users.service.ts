@@ -32,7 +32,7 @@ export class UsersService {
     }
 
     const payload = {
-      id: user.id,
+      id: user._id,
       name: user.name,
       documentType: user.documentType,
       documentNumber: user.documentNumber,
