@@ -5,14 +5,22 @@ import { Users } from './schemas/users.schema';
 
 @Injectable()
 export class UsersRepository {
-  constructor(@InjectModel(Users.name) private readonly usersModel: Model<Users>) {}
+  constructor(
+    @InjectModel(Users.name) private readonly usersModel: Model<Users>,
+  ) {}
 
-  async createUser(accountData: Partial<Users>): Promise<Users> {
-    const newAccount = new this.usersModel(accountData);
+  async createUser(userData: Partial<Users>): Promise<Users> {
+    const newAccount = new this.usersModel(userData);
     return newAccount.save();
   }
 
-  async findAccountByDNI(dni: string): Promise<Users | null> {
-    return this.usersModel.findOne({ dni });
+  async findUserByDNI({
+    documentType,
+    documentNumber,
+  }: {
+    documentType: 'CC' | 'TI' | 'CE';
+    documentNumber: string;
+  }): Promise<Users | null> {
+    return this.usersModel.findOne({ documentType, documentNumber });
   }
 }

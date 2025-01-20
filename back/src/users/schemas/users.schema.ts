@@ -9,9 +9,6 @@ export class Users extends Document {
   @Prop({ default: false, required: true }) 
   name: string;
 
-  @Prop({ default: false, required: true, unique: true }) 
-  email: string;
-
   @Prop({ default: false, required: true }) 
   password: string;
 
