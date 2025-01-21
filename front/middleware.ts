@@ -1,23 +1,30 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { jwtVerify } from 'jose';
 
-const NO_AUTH_PAGES = ['/login', '/register']
-const PROTECTED_BASE_ROUTE = '/dashboard'
+const NO_AUTH_PAGES = ['/login', '/register'];
+const PROTECTED_BASE_ROUTE = '/dashboard';
 
 export function middleware(req: NextRequest) {
-    const token = null;
+  const token = req.cookies.get('token')?.value;
+  let isAuthenticated = false;
 
-    if (NO_AUTH_PAGES.includes(req.nextUrl.pathname)) {
-        if (token) {
-            return NextResponse.redirect(new URL(PROTECTED_BASE_ROUTE, req.url));
-        }
+  if (token) {
+    try {
+      jwtVerify(token, new TextEncoder().encode('your_jwt_secret'));
+      isAuthenticated = true;
+    } catch (err: any) {
+      console.error('Invalid token:', err.message);
     }
+  }
 
-    if (req.nextUrl.pathname.startsWith(PROTECTED_BASE_ROUTE)) {
-        if (!token) {
-            return NextResponse.redirect(new URL('/login', req.url));
-        }
-    }
+  if (NO_AUTH_PAGES.includes(req.nextUrl.pathname) && isAuthenticated) {
+    return NextResponse.redirect(new URL(PROTECTED_BASE_ROUTE, req.url));
+  }
 
-    return NextResponse.next();
+  if (req.nextUrl.pathname.startsWith(PROTECTED_BASE_ROUTE) && !isAuthenticated) {
+    return NextResponse.redirect(new URL('/login', req.url));
+  }
+
+  return NextResponse.next();
 }

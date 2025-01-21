@@ -12,8 +12,7 @@ export default function Button(props: ButtonProps) {
   const { variant, children, href, fullWidth, isLink, className, ...buttonProps } = props;
 
   if (isLink && !Boolean(href)) {
-    throw new Error("Invalid Button type");
-    
+    throw new Error('Invalid Button type');
   }
 
   const baseClases = 'rounded cursor-pointer font-semibold py-2 px-3';
@@ -25,11 +24,14 @@ export default function Button(props: ButtonProps) {
   const disabledClasses = 'bg-gray-300 text-gray-800';
 
   const appliedClasses = [baseClases];
-  if (variant === 'primary') appliedClasses.push(primaryClasses);
-  if (variant === 'secondary') appliedClasses.push(secondaryClasses);
-  if (variant === 'danger') appliedClasses.push(dangerClasses);
+  if (buttonProps.disabled) {
+    appliedClasses.push(disabledClasses);
+  } else {
+    if (variant === 'primary') appliedClasses.push(primaryClasses);
+    if (variant === 'secondary') appliedClasses.push(secondaryClasses);
+    if (variant === 'danger') appliedClasses.push(dangerClasses);
+  }
   if (isLink) appliedClasses.push(linkClasses);
-  if (buttonProps.disabled) appliedClasses.push(disabledClasses);
   if (fullWidth) appliedClasses.push(fullWidthClasses);
   if (className) appliedClasses.push(className);
 

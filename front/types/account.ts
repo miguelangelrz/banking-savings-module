@@ -1,15 +1,19 @@
 type SavingsAccountPreview = {
     id: string;
+    alias?: string;
     lastFour: string;
     balance: number;
     currency: 'USD' | 'COP' | 'EUR';
 }
 
 type SavingsAccount = {
-    id: string;
     accountNumber: string;
+    accountType: 'savings' | 'current';
+    alias?: string;
     balance: number;
-    currency: 'USD' | 'COP' | 'EUR';
     createdAt: string;
+    currency: 'USD' | 'COP' | 'EUR';
+    id: string;
+    status: 'active' | 'inactive' | 'frozen';
     updatedAt: string;
 }

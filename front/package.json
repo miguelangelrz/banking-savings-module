@@ -11,6 +11,8 @@
     "test:watch": "jest --watchAll"
   },
   "dependencies": {
+    "jose": "^5.9.6",
+    "jsonwebtoken": "^9.0.2",
     "next": "15.1.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -22,6 +24,7 @@
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.0",
     "@types/jest": "^29.5.14",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^20",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19",

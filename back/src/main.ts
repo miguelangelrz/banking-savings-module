@@ -7,7 +7,7 @@ async function bootstrap() {
 
   const corsOptions = {
     origin: process.env.ALLOWED_ORIGINS,
-    methods: ['GET', 'POST', 'PUT', 'PATCH']
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
   }
 
   app.enableCors(corsOptions);
