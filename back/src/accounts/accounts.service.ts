@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  HttpException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -53,7 +54,7 @@ export class AccountsService {
         id,
       );
       if (!account) {
-        throw new NotFoundException('Not found');
+        throw new NotFoundException()
       }
 
       const result = await this.accountsRepository.deleteUserAccount(
@@ -62,11 +63,11 @@ export class AccountsService {
       );
       return result;
     } catch (e) {
-      throw new BadRequestException('Invalid identifier');
+      throw e
     }
   }
 
-  private generateAccountNumber(): string {
+  generateAccountNumber(): string {
     return Math.random().toString().slice(2, 12); // Ejemplo simple
   }
 }

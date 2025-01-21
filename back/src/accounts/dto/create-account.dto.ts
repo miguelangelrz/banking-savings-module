@@ -1,7 +1,15 @@
-import { IsString, IsNumber, Min, IsNotEmpty } from 'class-validator';
+import { IsString, IsNumber, Min, IsNotEmpty, MinLength } from 'class-validator';
 
 export class CreateAccountDto {
   @IsString()
+  @MinLength(3)
+  alias: string;
+
+  @IsString()
   @IsNotEmpty()
-  currency: 'USD' | 'COP';
+  accountType: 'savings' | 'current';
+
+  @IsString()
+  @IsNotEmpty()
+  currency: 'USD' | 'COP' | 'EUR';
 }
