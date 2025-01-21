@@ -5,13 +5,13 @@ import { jwtVerify } from 'jose';
 const NO_AUTH_PAGES = ['/login', '/register'];
 const PROTECTED_BASE_ROUTE = '/dashboard';
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const token = req.cookies.get('token')?.value;
   let isAuthenticated = false;
 
   if (token) {
     try {
-      jwtVerify(token, new TextEncoder().encode('your_jwt_secret'));
+      await jwtVerify(token, new TextEncoder().encode('your_jwt_secret'));
       isAuthenticated = true;
     } catch (err: any) {
       console.error('Invalid token:', err.message);

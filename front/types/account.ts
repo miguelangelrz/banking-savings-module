@@ -1,7 +1,7 @@
 type SavingsAccountPreview = {
-    id: string;
+    _id: string;
     alias?: string;
-    lastFour: string;
+    accountNumber: string;
     balance: number;
     currency: 'USD' | 'COP' | 'EUR';
 }
