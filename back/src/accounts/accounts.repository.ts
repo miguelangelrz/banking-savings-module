@@ -15,7 +15,7 @@ export class AccountsRepository {
     return newAccount.save();
   }
 
-  async findUserAccountById(userId: string, id: string): Promise<Users | null> {
+  async findUserAccountById(userId: string, id: string): Promise<Account | null> {
     return this.accountsModel.findOne({
       _id: id,
       holderId: userId,
@@ -23,8 +23,7 @@ export class AccountsRepository {
     });
   }
 
-  async findUserAccounts(userId: string): Promise<Array<Users> | null> {
-    console.log("#userid", userId)
+  async findUserAccounts(userId: string): Promise<Array<Account> | null> {
     return this.accountsModel.find({ holderId: userId, isDeleted: false });
   }
 

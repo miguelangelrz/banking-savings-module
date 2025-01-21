@@ -65,7 +65,6 @@ export default function RequestProduct() {
       await response.json();
       router.push('/dashboard/savings');
     } catch (err) {
-      console.log('#error', err);
       setError((err as Error).message);
     } finally {
       setLoading(false);

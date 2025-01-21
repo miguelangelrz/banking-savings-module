@@ -11,7 +11,7 @@ export async function middleware(req: NextRequest) {
 
   if (token) {
     try {
-      await jwtVerify(token, new TextEncoder().encode('your_jwt_secret'));
+      await jwtVerify(token, new TextEncoder().encode(process.env.JWT_KEY));
       isAuthenticated = true;
     } catch (err: any) {
       console.error('Invalid token:', err.message);

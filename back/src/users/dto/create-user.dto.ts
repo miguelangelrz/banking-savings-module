@@ -13,7 +13,6 @@ export class CreateUserDto {
   @IsNotEmpty()
   documentNumber: string;
 
-  @IsStrongPassword()
   @IsNotEmpty()
   password: string;
 }

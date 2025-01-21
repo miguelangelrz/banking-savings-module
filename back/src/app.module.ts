@@ -3,6 +3,7 @@ import { UsersModule } from './users/users.module';
 import { AccountsModule } from './accounts/accounts.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
+import { CryptoModule } from './crypto/crypto.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { PassportModule } from '@nestjs/passport';
     PassportModule,
     UsersModule,
     AccountsModule,
+    CryptoModule
   ],
   controllers: [],
   providers: [],

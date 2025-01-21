@@ -20,6 +20,8 @@ services:
     environment:
       - MONGO_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_HOST}:27017/${MONGO_DATABASE}?authSource=admin
       - ALLOWED_ORIGINS=${BACKEND_ALLOWED_ORIGINS}
+      - JWT_KEY=${JWT_KEY}
+      - CYPHER_KEY=${CYPHER_KEY}
     volumes:
       - ./back:/app
       - /app/node_modules
@@ -35,6 +37,7 @@ services:
       - '${FRONTEND_PORT}:3000'
     environment:
       - NEXT_PUBLIC_API_URL=${API_URL}
+      - JWT_KEY=${JWT_KEY}
     volumes:
       - ./front:/app
       - /app/node_modules
